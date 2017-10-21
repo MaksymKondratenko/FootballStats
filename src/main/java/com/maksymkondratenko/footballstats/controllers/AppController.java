@@ -3,11 +3,14 @@ package com.maksymkondratenko.footballstats.controllers;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,10 +26,7 @@ import com.maksymkondratenko.footballstats.model.Match;
 @Controller
 public class AppController {
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
+	@GetMapping({"/", "/home"})
 	public ModelAndView home() {
 		return new ModelAndView("home");
 	}
@@ -37,7 +37,16 @@ public class AppController {
 	}
 	
 	@PostMapping("/new-match")
-	public ModelAndView addNewMatch(@ModelAttribute Match match) {
+	public ModelAndView addNewMatch(@Valid @ModelAttribute("match") Match match, BindingResult result) {
+		if(result.hasErrors()) {
+			return new ModelAndView("new-match");
+		}
 		return new ModelAndView("new-match-info", "match", match);
+	}
+	
+	@GetMapping("/match-viewer")
+	public ModelAndView getMatchViewerPage(ModelAndView modelAndView) {
+		modelAndView.addObject("match-viewer");
+		return modelAndView;
 	}
 }

@@ -1,10 +1,27 @@
 package com.maksymkondratenko.footballstats.model;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Match {
+	
+	@NotNull(message="name must not be empty		")
 	private Club homeClub;
+	
+	@NotNull(message="name must not be empty		")
 	private Club awayClub;
+	
+	@Min(value=0, message="must be 0 or more") 
+	@Max(value=20, message="over the max number")
 	private int homeScore;
+	
+	@Min(value=0, message="must be 0 or more") 
+	@Max(value=20, message="over the max number")
 	private int awayScore;
+	
 	private String date;
 	
 	public Match() {
@@ -21,13 +38,21 @@ public class Match {
 		return homeClub;
 	}
 	public void setHomeClub(Club homeClub) {
-		this.homeClub = homeClub;
+		if(homeClub.getName().trim().equals("")) {
+			this.homeClub = null;
+		} else {
+			this.homeClub = homeClub;
+		}
 	}
 	public Club getAwayClub() {
 		return awayClub;
 	}
 	public void setAwayClub(Club awayClub) {
-		this.awayClub = awayClub;
+		if(awayClub.getName().trim().equals("")) {
+			this.awayClub = null;
+		} else {
+			this.awayClub = homeClub;
+		}
 	}
 	public int getHomeScore() {
 		return homeScore;

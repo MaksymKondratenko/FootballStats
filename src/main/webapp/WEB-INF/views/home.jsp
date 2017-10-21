@@ -5,8 +5,8 @@
 	<title>Home</title>
 </head>
 <body>
-<P><a href="new-match">To add a new match</a></P>
-<br/>
-<!-- <a href="match-viewer">Go to list all known matches</a>
- --></body>
+	<P><a href="new-match">To add a new match</a></P>
+	<br/>
+	<a href="match-viewer">Go to list all known matches</a>
+</body>
 </html>

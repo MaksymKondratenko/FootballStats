@@ -7,18 +7,30 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<style>
+	.error {
+	color: red;
+	}
+</style>
 </head>
 <body>
+	
 	<form:form method="POST" modelAttribute="match" action="new-match">
 		<fieldset>
 			<form:label path="homeClub">Home club:</form:label>
 			<form:input path="homeClub"/>
-			<form:label path="homeScore">Goals from home club:</form:label>
-			<form:input path="homeScore"/>
-			<form:label path="awayScore">Goals from away club:</form:label>
-			<form:input path="awayScore"/>
+			<form:errors path="homeClub" cssClass="error"/>
+		
+			<label>Score:</label>
+			<form:input path="homeScore" size="2"/>
+			<form:errors path="homeScore" cssClass="error"/>
+			<label> - </label>
+			<form:input path="awayScore" size="2"/>
+			<form:errors path="awayScore" cssClass="error"/>
+			
 			<form:label path="awayClub">Away club:</form:label>
 			<form:input path="awayClub"/>
+			<form:errors path="awayClub" cssClass="error"/>
 		</fieldset>
 		<input type="submit" value="Add match">
 	</form:form>
