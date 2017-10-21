@@ -51,7 +51,7 @@ public class Match {
 		if(awayClub.getName().trim().equals("")) {
 			this.awayClub = null;
 		} else {
-			this.awayClub = homeClub;
+			this.awayClub = awayClub;
 		}
 	}
 	public int getHomeScore() {

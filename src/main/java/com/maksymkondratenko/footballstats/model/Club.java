@@ -1,9 +1,5 @@
 package com.maksymkondratenko.footballstats.model;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 import org.hibernate.validator.constraints.NotBlank;
 
 public class Club {
