@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,21 +38,24 @@ public class AppController {
 	}
 	
 	@GetMapping("/new-match")
-	public ModelAndView getNewMatchPage() {
-		return new ModelAndView("new-match", "match", new Match());
+	public String getNewMatchPage(ModelMap modelMap) {
+		modelMap.addAttribute("match", new Match());
+		return "new-match";
 	}
 	
-	@PostMapping("/new-match")
-	public ModelAndView addNewMatch(@Valid @ModelAttribute("match") Match match, BindingResult result) {
+	@PostMapping("/new-match-info")
+	public String addNewMatch(@Valid @ModelAttribute("match") Match match, BindingResult result, ModelMap modelMap) {
 		if(result.hasErrors()) {
-			return new ModelAndView("new-match");
+			modelMap.addAttribute("errors", result.getAllErrors());
+			return "new-match";
+		} else {
+			return "new-match-info";
 		}
-		return new ModelAndView("new-match-info", "match", match);
 	}
 	
-	@GetMapping("/match-viewer")
-	public ModelAndView getMatchViewerPage(ModelAndView modelAndView) {
-		modelAndView.addObject("match-viewer");
-		return modelAndView;
+	@GetMapping("/new-match-info")
+	public String getMatchViewerPage() {
+		return "new-match-info";
 	}
+	
 }

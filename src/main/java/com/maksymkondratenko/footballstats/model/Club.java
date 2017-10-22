@@ -4,7 +4,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 public class Club {
 	
-	@NotBlank
+	@NotBlank(message = "Cannot be blank")
 	private String name;
 	
 	public Club(String name) {

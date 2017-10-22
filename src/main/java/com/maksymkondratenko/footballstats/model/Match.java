@@ -8,24 +8,30 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class Match {
 	
-	@NotNull(message="name must not be empty		")
+	@NotNull(message="{home-name.empty.error}")
 	private Club homeClub;
 	
-	@NotNull(message="name must not be empty		")
+	@NotNull(message="{away-name.empty.error}")
 	private Club awayClub;
 	
-	@Min(value=0, message="must be 0 or more") 
-	@Max(value=20, message="over the max number")
+	@Min(value=0, message="{score.min.error}") 
+	@Max(value=20, message="{score.max.error}")
 	private int homeScore;
 	
-	@Min(value=0, message="must be 0 or more") 
-	@Max(value=20, message="over the max number")
+	@Min(value=0, message="{score.min.error}") 
+	@Max(value=20, message="{score.max.error}")
 	private int awayScore;
 	
 	private String date;
 	
 	public Match() {
 		
+	}
+	public Match(Club homeClub, Club awayClub, int homeScore, int awayScore) {
+		this.setHomeClub(homeClub);
+		this.setAwayClub(awayClub);
+		this.setHomeScore(homeScore);
+		this.setAwayScore(awayScore);
 	}
 	public Match(Club homeClub, Club awayClub, int homeScore, int awayScore, String date) {
 		this.setHomeClub(homeClub);

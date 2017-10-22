@@ -8,34 +8,67 @@
 <meta http-equiv="Content-Type" content="text/html; UTF-8">
 <title>Insert title here</title>
 <style>
-	.error {
-	color: red;
-	}
+/* 	table, tr {
+		border: 1px solid black;
+	} */
+	/* td {
+		border: 1px dashed grey;
+	} */
 </style>
 </head>
 <body>
-	
-	<form:form method="POST" modelAttribute="match" action="new-match">
-		<fieldset>
-			<form:label path="homeClub"><spring:message code="home-club"/>:</form:label>
-			<form:input path="homeClub"/>
-			<form:errors path="homeClub" cssClass="error"/>
-		
-			<label><spring:message code="score"/>:</label>
-			<form:input path="homeScore" size="2"/>
-			<form:errors path="homeScore" cssClass="error"/>
-			
-			<label> - </label>
-			<form:input path="awayScore" size="2"/>
-			<form:errors path="awayScore" cssClass="error"/>
-			
-			<form:label path="awayClub"><spring:message code="away-club"/>:</form:label>
-			<form:input path="awayClub"/>
-			<form:errors path="awayClub" cssClass="error"/>
-		</fieldset>
+	<table>
+	<tr>
+	<td>
+	<form:form method="POST" modelAttribute="match" action="new-match-info">
+		<table>
+			<tr>
+				<td>
+					<form:label path="homeClub"><spring:message code="home-club"/>:</form:label>
+					<form:input path="homeClub"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label><spring:message code="score"/>:</label>
+					<form:input path="homeScore" size="2"/>
+					<label> - </label>
+					<form:input path="awayScore" size="2"/>
+				</td>	
+			</tr>
+			<tr>
+				<td>	
+					<form:label path="awayClub"><spring:message code="away-club"/>:</form:label>
+					<form:input path="awayClub"/>
+				</td>
+			</tr>
+		</table>
 		<input type="submit" value="Add match">
 	</form:form>
+	</td>
+	<td>
+		<table>
+				<c:choose>
+					<c:when test="${not empty  errors}">
+    					<div class="error">
+    						<c:forEach items="${errors}" var="err">
+        						<tr>${err.defaultMessage}</tr>
+        						<br/>
+    						</c:forEach>
+    					</div>
+					</c:when>
+				</c:choose>
+		</table>
+	</td>
+	</tr>
+	</table>
 	<br/>
 	<a href="home"><spring:message code="go-home"/></a>
+	<span style="float: right;">
+		<a href="new-match?lang=en">en</a>
+		<a href="new-match?lang=pl">pl</a>
+		<a href="new-match?lang=ru">ru</a>
+		<a href="new-match?lang=uk">ua</a>
+	</span>
 </body>
 </html>
