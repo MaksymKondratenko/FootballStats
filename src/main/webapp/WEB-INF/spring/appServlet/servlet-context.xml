@@ -22,11 +22,12 @@
 	</bean>
 	
 	<context:component-scan base-package="com.maksymkondratenko.footballstats" />
+	<context:annotation-config />
 	
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/*"/>
-			<bean class="com.maksymkondratenko.footballstats.interceptors.NewMatchInterceptor"></bean>
+			<ref bean="newMatchInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
 	
