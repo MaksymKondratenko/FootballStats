@@ -6,15 +6,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; UTF-8">
-<title>Insert title here</title>
-<style>
-/* 	table, tr {
-		border: 1px solid black;
-	} */
-	/* td {
-		border: 1px dashed grey;
-	} */
-</style>
+<title>Add a new match</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+	function doAjax() {
+		$.ajax({
+			url : 'checkHomeScore',
+			data : ({homeScore : $('#homeScore').val()}),
+			success : function(data) {
+				$('#scoreAssessment').html(data);
+			}
+		});
+	}
+</script>
 </head>
 <body>
 	<table>
@@ -31,9 +35,10 @@
 			<tr>
 				<td>
 					<label><spring:message code="score"/>:</label>
-					<form:input path="homeScore" size="2"/>
+					<form:input path="homeScore" size="2" onkeyup="doAjax()"/>
 					<label> - </label>
-					<form:input path="awayScore" size="2"/>
+					<form:input path="awayScore" size="2" onkeyup="doAjax()"/>
+					<span style="float: right" id="scoreAssessment"></span>
 				</td>	
 			</tr>
 			<tr>
